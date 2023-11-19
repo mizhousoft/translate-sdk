@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.mizhousoft.commons.restclient.service.RestClientService;
 import com.mizhousoft.translate.TranslateService;
 import com.mizhousoft.translate.baidu.impl.BaiduTranslateServiceImpl;
 import com.mizhousoft.translate.baidu.profile.BaiduProfile;
@@ -22,9 +21,6 @@ public class BaiduTranslateConfiguration
 	@Autowired
 	private BaiduTranslateProperties baiduProperties;
 
-	@Autowired
-	private RestClientService restClientService;
-
 	private BaiduProfile profile;
 
 	@Bean
@@ -35,7 +31,6 @@ public class BaiduTranslateConfiguration
 
 		BaiduTranslateServiceImpl translateService = new BaiduTranslateServiceImpl();
 		translateService.setProfile(profile);
-		translateService.setRestClientService(restClientService);
 
 		return translateService;
 	}

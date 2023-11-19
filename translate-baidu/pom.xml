@@ -21,11 +21,6 @@
 			<version>${translate.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.mizhousoft.boot</groupId>
-			<artifactId>restclient-spring-boot-starter</artifactId>
-			<version>${mizhousoft.boot.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 		</dependency>
@@ -38,9 +33,22 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 		<dependency>
+	        <groupId>com.konghq</groupId>
+	        <artifactId>unirest-java-core</artifactId>
+	    </dependency>
+	    <dependency>
+	        <groupId>com.konghq</groupId>
+	        <artifactId>unirest-objectmapper-jackson</artifactId>
+	    </dependency>
+		<dependency>
     		<groupId>org.junit.jupiter</groupId>
     		<artifactId>junit-jupiter</artifactId>
     		<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

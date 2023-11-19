@@ -12,14 +12,15 @@ import org.apache.commons.lang3.StringUtils;
 import com.mizhousoft.commons.crypto.generator.RandomGenerator;
 import com.mizhousoft.commons.json.JSONException;
 import com.mizhousoft.commons.json.JSONUtils;
-import com.mizhousoft.commons.restclient.RestException;
-import com.mizhousoft.commons.restclient.service.RestClientService;
 import com.mizhousoft.translate.LanguageEnum;
 import com.mizhousoft.translate.TranslateException;
 import com.mizhousoft.translate.TranslateService;
 import com.mizhousoft.translate.baidu.profile.BaiduProfile;
 import com.mizhousoft.translate.baidu.response.BaiduTranslateResponse;
 import com.mizhousoft.translate.baidu.response.BaiduTranslateResult;
+
+import kong.unirest.core.Unirest;
+import kong.unirest.core.UnirestException;
 
 /**
  * 翻译接口
@@ -33,11 +34,6 @@ public class BaiduTranslateServiceImpl implements TranslateService
 	private BaiduProfile profile;
 
 	/**
-	 * REST服务
-	 */
-	private RestClientService restClientService;
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -48,12 +44,11 @@ public class BaiduTranslateServiceImpl implements TranslateService
 		String toSignValue = profile.getAppId() + q + salt + profile.getAppSecret();
 		String sign = DigestUtils.md5Hex(toSignValue);
 
-		String format = "http://api.fanyi.baidu.com/api/trans/vip/translate?q=%s&from=%s&to=%s&appid=%s&salt=%s&sign=%s";
-		String url = String.format(format, q, from.getValue(), to.getValue(), profile.getAppId(), salt, sign);
-
 		try
 		{
-			String response = restClientService.postFormForObject(url, Collections.emptyMap(), Collections.emptyMap(), String.class);
+			String response = Unirest.get("http://api.fanyi.baidu.com/api/trans/vip/translate").queryString("q", q)
+			        .queryString("from", from.getValue()).queryString("to", to.getValue()).queryString("appid", profile.getAppId())
+			        .queryString("salt", salt).queryString("sign", sign).asString().getBody();
 
 			BaiduTranslateResponse resp = JSONUtils.parse(response, BaiduTranslateResponse.class);
 
@@ -73,7 +68,11 @@ public class BaiduTranslateServiceImpl implements TranslateService
 
 			return dsts;
 		}
-		catch (RestException | JSONException e)
+		catch (UnirestException e)
+		{
+			throw new TranslateException(e.getMessage(), e);
+		}
+		catch (JSONException e)
 		{
 			throw new TranslateException(e.getMessage(), e);
 		}
@@ -87,15 +86,5 @@ public class BaiduTranslateServiceImpl implements TranslateService
 	public void setProfile(BaiduProfile profile)
 	{
 		this.profile = profile;
-	}
-
-	/**
-	 * 设置restClientService
-	 * 
-	 * @param restClientService
-	 */
-	public void setRestClientService(RestClientService restClientService)
-	{
-		this.restClientService = restClientService;
 	}
 }

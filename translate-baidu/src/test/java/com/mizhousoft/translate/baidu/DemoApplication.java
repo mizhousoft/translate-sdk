@@ -1,13 +1,11 @@
 package com.mizhousoft.translate.baidu;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.mizhousoft.commons.restclient.service.RestClientService;
 import com.mizhousoft.translate.TranslateService;
 import com.mizhousoft.translate.baidu.impl.BaiduTranslateServiceImpl;
 import com.mizhousoft.translate.baidu.profile.BaiduProfile;
@@ -16,9 +14,6 @@ import com.mizhousoft.translate.baidu.profile.BaiduProfile;
 @SpringBootApplication
 public class DemoApplication
 {
-	@Autowired
-	private RestClientService restClientService;
-
 	@Value("${translate.baidu.app-id}")
 	private String appId;
 
@@ -45,7 +40,6 @@ public class DemoApplication
 	{
 		BaiduTranslateServiceImpl translateService = new BaiduTranslateServiceImpl();
 		translateService.setProfile(profile);
-		translateService.setRestClientService(restClientService);
 
 		return translateService;
 	}
