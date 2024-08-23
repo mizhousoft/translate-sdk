@@ -6,21 +6,21 @@
 	<parent>
 		<groupId>com.mizhousoft</groupId>
 		<artifactId>mizhousoft-bom</artifactId>
-		<version>2.0.1-SNAPSHOT</version>
+		<version>2.0.1</version>
 	</parent>
 
 	<groupId>com.mizhousoft.sdk</groupId>
 	<artifactId>translate-sdk</artifactId>
-	<version>2.0.1-SNAPSHOT</version>
+	<version>2.0.1</version>
 	<packaging>pom</packaging>
 	<name>translate-sdk</name>
 	<description>Translate SDK</description>
 
 	<properties>
-		<commons.version>2.0.1-SNAPSHOT</commons.version>
-		<mizhousoft.boot.version>2.0.1-SNAPSHOT</mizhousoft.boot.version>
+		<commons.version>2.0.1</commons.version>
+		<mizhousoft.boot.version>2.0.1</mizhousoft.boot.version>
 			
-		<translate.version>2.0.1-SNAPSHOT</translate.version>
+		<translate.version>2.0.1</translate.version>
 	</properties>
 
 	<modules>
