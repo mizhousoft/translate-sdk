@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.mizhousoft.commons.crypto.generator.RandomGenerator;
 import com.mizhousoft.commons.json.JSONException;
 import com.mizhousoft.commons.json.JSONUtils;
+import com.mizhousoft.commons.lang.CollectionUtils;
 import com.mizhousoft.translate.LanguageEnum;
 import com.mizhousoft.translate.TranslateException;
 import com.mizhousoft.translate.TranslateService;
